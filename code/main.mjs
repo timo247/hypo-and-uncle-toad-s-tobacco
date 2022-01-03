@@ -7,6 +7,7 @@ import Menu from "./scenes/menu.mjs";
 
 let kaboomCanvas = document.querySelector("#myCanvas")
 console.log("client width",document.body.clientWidth);
+
 console.log(document.querySelector("canvas"))
 console.log("window height",document.querySelector("canvas").clientHeight);
 
@@ -24,6 +25,8 @@ const k = kaboom({
     //background: [104, 104, 130,],
     background: ("black")
 })
+console.log("kboom width:", width())
+console.log("kboom height:", height())
 
 export default k;
 let loader = new Loader

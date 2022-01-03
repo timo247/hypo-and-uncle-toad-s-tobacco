@@ -8,7 +8,7 @@ export default class JumpScene {
 		this.PIPE_OPEN = PIPE_OPEN
 		this.PIPE_MIN = PIPE_MIN
 		this.JUMP_FORCE = JUMP_FORCE
-		this.SPEED = SPEED
+		this.SPEED = 0
 		this.CEILING = CEILING
 		this.addJumpScene = this.addJumpScene.bind(this)
 		this.spawnPipe = this.spawnPipe.bind(this)

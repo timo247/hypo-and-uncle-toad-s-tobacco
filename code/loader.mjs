@@ -32,7 +32,8 @@ export default class Loader {
                 "jump": 8
             },
         })
-        k.loadFont("unscii", "fonts/unscii_8x8.png", 8, 8);
+        loadSprite("restingHypo", "sprites/hypo-pink.svg")
+        k.loadFont("unscii", "fonts/unscii_8x8.png", 24, 24);
         k.loadSound("hit", "../sounds/heartImpact.wav")
         k.loadSound("woosh", "../sounds/airWoosh.wav")
     }

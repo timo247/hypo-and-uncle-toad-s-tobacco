@@ -13,7 +13,11 @@ export default class Hypocampus{
             body(),
             {
                 speed: 250,
-                scale: 0.17
+                //scale: 0.17,
+                scale: (1254 / 557) * (width() / height())  * (0.17 / 13),
+                //scale: ((1254 / 557) * ((width()/height()) / (1254 / 557)) / 13.24),
+               // height: 46.7 / height(),
+                //width: 395.1 / width(),
             },            
             "player"
         ]);    

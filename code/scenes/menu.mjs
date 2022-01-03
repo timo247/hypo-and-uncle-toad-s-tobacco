@@ -1,5 +1,6 @@
 import k from "../main.mjs";
 import Button from "../objects/button.mjs";
+import RestingHypo from "../objects/restingHypo.mjs";
 
 export default class Menu {
     constructor() {
@@ -12,11 +13,15 @@ export default class Menu {
 
     addMenu() {        
             
-            let startButton = new Button ({txt : "Start", p : vec2(200, 100), f : () => go("jumpScene")})
-            let quitButton = new Button ({txt : "Pause", p : vec2(200, 200), f : () => pause()})
+            let startButton = new Button ({txt : "Start", p : vec2( width()/2, height()*1/3), f : () => go("jumpScene")})
+            let quitButton = new Button ({txt : "Pause", p : vec2(width()/2, height()*2/3), f : () => pause()})
             console.log(startButton)
             startButton.addButton()
             quitButton.addButton()
+
+            let restingHypo = new RestingHypo;
+            restingHypo.addRestingHypoObj()
+            
 
             // reset cursor to default at frame start for easier cursor management
             onUpdate(() => cursor("default"))
