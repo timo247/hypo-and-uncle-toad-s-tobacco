@@ -1,14 +1,16 @@
 import k from "../main.mjs";
 import Hypocampus from "../objects/hypocampus.mjs";
+import Salad from "../objects/salad.mjs";
+import movingSalad from "../objects/movingSalad.mjs";
 import { addScore } from "../objects/score.mjs";
 import { updateScore } from "../objects/score.mjs";
 
 export default class JumpScene {
-	constructor({ PIPE_OPEN = 240, PIPE_MIN = 60, JUMP_FORCE = 800, SPEED = 320, CEILING = -60 } = {}) {
+	constructor({ PIPE_OPEN = 240, PIPE_MIN = 60, JUMP_FORCE = 550 * k.height() / 640, SPEED = 320, CEILING = -60 } = {}) {
 		this.PIPE_OPEN = PIPE_OPEN
 		this.PIPE_MIN = PIPE_MIN
 		this.JUMP_FORCE = JUMP_FORCE
-		this.SPEED = 0
+		this.SPEED = SPEED
 		this.CEILING = CEILING
 		this.addJumpScene = this.addJumpScene.bind(this)
 		this.spawnPipe = this.spawnPipe.bind(this)
@@ -18,14 +20,17 @@ export default class JumpScene {
 	addJumpScene() {
 		k.background = k.rgb(255, 255, 255);
 		// define gravity
-		gravity(0)
+		gravity(3200 * height() / 640)
 
 
 		let hypocampusObj = new Hypocampus;
 		let hypocampus = hypocampusObj.addHypocampusObj();
 		hypocampus.play("idle")
+
+		let saladCounter = new Salad({scale: 0.5 * k.height() / 640, posX: 60, posY: 60});
+		saladCounter.addSaladObj()
 		
-		console.log(hypocampus)		
+		console.log("hypo wiwdth",hypocampus.height)		
 		let score = 0;
 		let scoreLabel = addScore(score);
 
@@ -34,7 +39,7 @@ export default class JumpScene {
 		onKeyPress("space", () => {
 			hypocampus.jump(this.JUMP_FORCE)
 			console.log("jump")
-			play("woosh")
+			play("tinySplash")
 		})
 
 		// mobile
@@ -69,11 +74,18 @@ export default class JumpScene {
 			addKaboom(hypocampus.pos)
 		})
 
+		k.onCollide("player", "salad", (hypo, salad) => {
+			score++;
+			updateScore(score, scoreLabel);
+			k.destroy(salad);			
+			saladCounter.hasJustMoved = true;
+		})
+
 		// per frame event for all objects with tag 'pipe'
 		onUpdate("pipe", (p) => {
 			// check if bean passed the pipe
 			if (p.pos.x + p.width <= hypocampus.pos.x && p.passed === false) {
-				score = updateScore(score, scoreLabel)
+				//score = updateScore(score, scoreLabel)
 				p.passed = true
 			}
 		})
@@ -86,6 +98,12 @@ export default class JumpScene {
 		const h1 = rand(this.PIPE_MIN, height() - this.PIPE_MIN - this.PIPE_OPEN)
 		const h2 = height() - h1 - this.PIPE_OPEN
 
+
+		let saladPos = h1 + (0.5 * this.PIPE_OPEN);
+		console.log("saladpos", saladPos)
+		let salad = new movingSalad({posX: width(), posY: saladPos, speed : this.SPEED, dir: LEFT})
+		salad.addSaladObj();
+
 		add([
 			pos(width(), 0),
 			rect(64, h1),
@@ -96,6 +114,9 @@ export default class JumpScene {
 			cleanup(),
 			// give it tags to easier define behaviors see below
 			"pipe",
+			{
+				scale: k.height() / 557
+			}
 		])
 
 		add([
@@ -109,8 +130,13 @@ export default class JumpScene {
 			// give it tags to easier define behaviors see below
 			"pipe",
 			// raw obj just assigns every field to the game obj
-			{ passed: false, },
+			{ 
+				passed: false,
+				scale: k.height() / 557
+			},
 		])
+
+		
 	}
 
 	loadJumpScene() { return k.scene("jumpScene", this.addJumpScene); }

@@ -8,8 +8,11 @@ export default class Loader {
              origin: k
          });
          */
-        loadSprite("hypocampus", "/sprites/hypos-8.png", {
+        loadSprite("hypocampus", "/sprites/hypos-8-red.svg", {
             origin: k,
+            //height: height(),
+            "width": 700,
+
             // The image contains 9 frames layed out horizontally, slice it into individual frames
             sliceX: 8,
             // Define animations
@@ -33,8 +36,12 @@ export default class Loader {
             },
         })
         loadSprite("restingHypo", "sprites/hypo-pink.svg")
+        loadSprite("salad", "sprites/salad.svg")
         k.loadFont("unscii", "fonts/unscii_8x8.png", 24, 24);
         k.loadSound("hit", "../sounds/heartImpact.wav")
         k.loadSound("woosh", "../sounds/airWoosh.wav")
+        k.loadSound("enteringWaterSplash", "../sounds/entering-water.mp3")
+        k.loadSound("tinySplash", "../sounds/tiny-splash.mp3")
+        k.loadSound("buble", "../sounds/bubble-one.mp3")
     }
 };
