@@ -5,7 +5,7 @@ export function addScore(score) {
 	const scoreLabel = add([
 		text(score),
 		origin("center"),
-		pos(width() / 5, 80),
+		pos(width() / 10, 80),
 		fixed(),
 	])
 
@@ -16,5 +16,10 @@ export function addScore(score) {
 export function updateScore(score, scoreLabel) {
     score++
     scoreLabel.text = score
+	return(score)
+}
+
+
+export function getScore(){
 	return(score)
 }

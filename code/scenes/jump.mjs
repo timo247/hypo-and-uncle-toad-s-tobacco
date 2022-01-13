@@ -4,9 +4,12 @@ import Salad from "../objects/salad.mjs";
 import movingSalad from "../objects/movingSalad.mjs";
 import { addScore } from "../objects/score.mjs";
 import { updateScore } from "../objects/score.mjs";
+import LoseScene from "./lose.mjs";
+import Ground from "../objects/ground.mjs";
+import {getScore} from "../objects/score.mjs"
 
 export default class JumpScene {
-	constructor({ PIPE_OPEN = 240, PIPE_MIN = 60, JUMP_FORCE = 550 * k.height() / 640, SPEED = 320, CEILING = -60 } = {}) {
+	constructor({ PIPE_OPEN = 240 * k.height()/640, PIPE_MIN = 60 * k.height()/640, JUMP_FORCE = 550 * k.height() / 640, SPEED = 320 * k.height()/640, CEILING = -60 * k.height()/640 } = {}) {
 		this.PIPE_OPEN = PIPE_OPEN
 		this.PIPE_MIN = PIPE_MIN
 		this.JUMP_FORCE = JUMP_FORCE
@@ -22,7 +25,9 @@ export default class JumpScene {
 		// define gravity
 		gravity(3200 * height() / 640)
 
-
+		let music = k.play("starsArpMusic",{
+			loop: true
+		})
 		let hypocampusObj = new Hypocampus;
 		let hypocampus = hypocampusObj.addHypocampusObj();
 		hypocampus.play("idle")
@@ -34,22 +39,20 @@ export default class JumpScene {
 		let score = 0;
 		let scoreLabel = addScore(score);
 
+		let groundObj = new Ground;
+		let ground = groundObj.addGroundObj();
+
 		// hypo movement
 		// jump
 		onKeyPress("space", () => {
 			hypocampus.jump(this.JUMP_FORCE)
 			console.log("jump")
-			play("tinySplash")
+				play("tinySplash")
 		})
-
 		// mobile
 		onClick(() => {
 			hypocampus.jump(this.JUMP_FORCE)
-			play("woosh")
-		})
-
-		onKeyPress("p", () => {
-			pause();
+			play("tinySplash")
 		})
 
 
@@ -57,7 +60,12 @@ export default class JumpScene {
 		hypocampus.onUpdate(() => {
 			if (hypocampus.pos.y >= height() || hypocampus.pos.y <= this.CEILING) {
 				// switch to "lose" scene
-				go("loseScene", score)
+				let loseScene = new LoseScene()
+				loseScene.updateLastSceneScore(score);
+				loseScene.loadLoseScene();
+				k.go("loseScene")
+				play("hit")
+
 			}
 		})
 
@@ -69,9 +77,13 @@ export default class JumpScene {
 
 		// callback when hypo onCollide with objects with tag "pipe"
 		k.onCollide("player", "pipe", () => {
-			k.go("loseScene", score)
+			let loseScene = new LoseScene()
+				loseScene.updateLastSceneScore(score);
+				loseScene.loadLoseScene();
+				k.go("loseScene")
 			play("hit")
 			addKaboom(hypocampus.pos)
+			music.pause();
 		})
 
 		k.onCollide("player", "salad", (hypo, salad) => {

@@ -1,2 +1,2 @@
-Ajouter différents splash et les jouer de façon random
-Ajouter le premier splash d'entrée
+Ajouter le sol
+Ajouter la musique

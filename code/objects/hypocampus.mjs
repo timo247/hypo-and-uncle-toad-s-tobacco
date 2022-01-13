@@ -1,7 +1,7 @@
 import k from "../main.mjs";
 export default class Hypocampus{
-    constructor({} = {}){
-
+    constructor({scale = 1.3 * k.height() / 640 } = {}){
+        this.scale = scale
     }
 
     addHypocampusObj(){
@@ -14,7 +14,7 @@ export default class Hypocampus{
             
             {
                 speed: 250,
-                scale: (1.3 * k.height() / 640),
+                scale: this.scale,
                 //scale: (46.7 / height())
                 //scale: (67.16 / k.width())
                 //scale: ((1254 / 557) * ((width()/height()) / (1254 / 557)) / 13.24),
