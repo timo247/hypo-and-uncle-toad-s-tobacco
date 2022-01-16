@@ -1,18 +1,21 @@
 import k from "../main.mjs";
 export default class Toad{
-    constructor({scale = 1.3 * k.height() / 640, resting = false } = {}){
+    constructor({scale = 4 * k.height() / 640, resting = false, posX = k.width() * 3/4, posY = k.height()/2 } = {}){
         this.scale = scale,
-        this.resting = resting
+        this.resting = resting,
+        this.addToadObj = this.addToadObj.bind(this),
+        this.posX = posX,
+        this.posY = posY
     }
 
     addToadObj(){
         if(!this.resting){
-            const Toad = k.add([
+            const toad = k.add([
                 k.sprite("toad"),
                 k.origin("center"),
-                k.pos(k.center()),
+                k.pos(this.posX, this.posY),
                 
-                 area(),
+                area(),
                 body(),            
                 {
                     speed: 250,
@@ -24,12 +27,14 @@ export default class Toad{
                     //width: 395.1 / width(),
                 },            
                 "toad"
-            ]);    
+            ]); 
+            
+            return toad;
         } else {
-            const Toad = k.add([
+            const toad = k.add([
                 k.sprite("toad"),
                 k.origin("center"),
-                k.pos(k.center()),            
+                k.pos(this.posX, this.posY),          
                 {
                     speed: 250,
                     scale: this.scale,
@@ -41,8 +46,7 @@ export default class Toad{
                 },            
                 "toad"
             ]);   
+            return toad;
         }
-       
-        return hypocampus;
     }
 }

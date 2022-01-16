@@ -2,6 +2,7 @@ import k from "../main.mjs";
 import Hypocampus from "../objects/hypocampus.mjs";
 import Button from "../objects/button.mjs";
 import RestingHypo from "../objects/restingHypo.mjs";
+import Toad from "../objects/toad.js";
 
 export default class LoseScene {
     constructor({lastGameScore = 0} = {}) {
@@ -25,6 +26,11 @@ export default class LoseScene {
 
         let restingHypo = new RestingHypo({scale: 3.4 * k.height() / 640});
         restingHypo.addRestingHypoObj()
+
+        let restingToadObj = new Toad({resting: true});
+        let restingToad = restingToadObj.addToadObj();
+        console.log(restingToadObj)
+        restingToad.play("toadIdle");
 
             // display score
            let scoreText = add([

@@ -35,24 +35,44 @@ export default class Loader {
                 "jump": 8
             },
         })
+
+        loadSprite("toad", "/sprites/toad.svg", {
+            origin: k,
+            //height: height(),
+            "width": 700,
+
+            // The image contains 9 frames layed out horizontally, slice it into individual frames
+            sliceX: 7,
+            // Define animations
+            anims: {
+                "toadIdle": {
+                    // Starts from frame 0, ends at frame 3
+                    from: 0,
+                    to: 6,
+                    // Frame per second
+                    speed: 5,
+                    loop: true,
+                }
+            }
+        })
+
         loadSprite("restingHypo", "sprites/hypo-pink.svg");
         loadSprite("salad", "sprites/salad.svg");
         loadSprite("ground", "sprites/ground.svg");
         loadSprite("toad", "sprites/toad.svg")
+        loadSprite("rock1", 'sprites/rock1.svg')
+        loadSprite("rock2", 'sprites/rock2.svg')
         k.loadFont("unscii", "fonts/unscii_8x8.png", 24, 24);
         k.loadSound("hit", "../sounds/heartImpact.wav")
         k.loadSound("woosh", "../sounds/airWoosh.wav")
         k.loadSound("enteringWaterSplash", "../sounds/entering-water.mp3")
         k.loadSound("tinySplash", "../sounds/tiny-splash.mp3")
-        k.loadSound("tinySplash2", "../sounds/tiny-splash-2.mp3")
-        k.loadSound("tinySplash3", "../sounds/tiny-splash-3.mp3")
+        //k.loadSound("tinySplash2", "../sounds/tiny-splash-2.mp3")
+        //k.loadSound("tinySplash3", "../sounds/tiny-splash-3.mp3")
         k.loadSound("buble", "../sounds/bubble-one.mp3")
-        k.loadSound("botRadioMusic", "../sounds/Botradio.mp3")
-        k.loadSound("gorilleDilemMusic", "../sounds/gorilleDilemMusic.mp3")
-        k.loadSound("spaceArpMusic", "../sounds/spaceArpMusic.mp3")
         k.loadSound("starsArpMusic", "../sounds/starsArpMusic.mp3")
-        k.loadSound("antepsDedalMusic", "../sounds/antepsDedalMusic.mp3")
-        k.loadSound("banbouGreenBrumeMusic", "../sounds/banbouGreenBrumeMusic.mp3")
+        //k.loadSound("antepsDedalMusic", "../sounds/antepsDedalMusic.mp3")
+        //k.loadSound("banbouGreenBrumeMusic", "../sounds/banbouGreenBrumeMusic.mp3")
 
     }
 };

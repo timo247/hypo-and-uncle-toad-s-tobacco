@@ -7,6 +7,7 @@ import { updateScore } from "../objects/score.mjs";
 import LoseScene from "./lose.mjs";
 import Ground from "../objects/ground.mjs";
 import {getScore} from "../objects/score.mjs"
+import Rock from "../objects/rock.js";
 
 export default class JumpScene {
 	constructor({ PIPE_OPEN = 240 * k.height()/640, PIPE_MIN = 60 * k.height()/640, JUMP_FORCE = 550 * k.height() / 640, SPEED = 320 * k.height()/640, CEILING = -60 * k.height()/640 } = {}) {
@@ -21,6 +22,7 @@ export default class JumpScene {
 	}
 
 	addJumpScene() {
+		console.log(this)
 		k.background = k.rgb(255, 255, 255);
 		// define gravity
 		gravity(3200 * height() / 640)
@@ -39,8 +41,6 @@ export default class JumpScene {
 		let score = 0;
 		let scoreLabel = addScore(score);
 
-		let groundObj = new Ground;
-		let ground = groundObj.addGroundObj();
 
 		// hypo movement
 		// jump
@@ -60,12 +60,7 @@ export default class JumpScene {
 		hypocampus.onUpdate(() => {
 			if (hypocampus.pos.y >= height() || hypocampus.pos.y <= this.CEILING) {
 				// switch to "lose" scene
-				let loseScene = new LoseScene()
-				loseScene.updateLastSceneScore(score);
-				loseScene.loadLoseScene();
-				k.go("loseScene")
-				play("hit")
-
+				this.goLoseScene(score, hypocampus, music);
 			}
 		})
 
@@ -77,13 +72,7 @@ export default class JumpScene {
 
 		// callback when hypo onCollide with objects with tag "pipe"
 		k.onCollide("player", "pipe", () => {
-			let loseScene = new LoseScene()
-				loseScene.updateLastSceneScore(score);
-				loseScene.loadLoseScene();
-				k.go("loseScene")
-			play("hit")
-			addKaboom(hypocampus.pos)
-			music.pause();
+			this.goLoseScene(score, hypocampus, music);
 		})
 
 		k.onCollide("player", "salad", (hypo, salad) => {
@@ -107,9 +96,12 @@ export default class JumpScene {
 	spawnPipe() {
 
 		// calculate pipe positions
-		const h1 = rand(this.PIPE_MIN, height() - this.PIPE_MIN - this.PIPE_OPEN)
-		const h2 = height() - h1 - this.PIPE_OPEN
+		const h1 = rand(this.PIPE_MIN, k.height() - this.PIPE_MIN - this.PIPE_OPEN)
+		const h2 = k.height() - h1 - this.PIPE_OPEN
 
+
+		console.log("h1", h1)
+		console.log("h2", h2)
 
 		let saladPos = h1 + (0.5 * this.PIPE_OPEN);
 		console.log("saladpos", saladPos)
@@ -127,13 +119,13 @@ export default class JumpScene {
 			// give it tags to easier define behaviors see below
 			"pipe",
 			{
-				scale: k.height() / 557
+				scale: k.height() / 640
 			}
 		])
 
 		add([
 			pos(width(), h1 + this.PIPE_OPEN),
-			rect(64, h2),
+			rect(64, h2 * 640 / k.height()),
 			color(0, 127, 255),
 			outline(4),
 			area(),
@@ -144,13 +136,26 @@ export default class JumpScene {
 			// raw obj just assigns every field to the game obj
 			{ 
 				passed: false,
-				scale: k.height() / 557
+				scale: k.height() / 640
 			},
 		])
+
+		let rockObj = new Rock({posX: width() + (30*k.height()/640), posY:0})
+		rockObj.randomizeRockType();
+		let rock = rockObj.addRockObj();
 
 		
 	}
 
+	goLoseScene(score, hypocampus, music){
+		let loseScene = new LoseScene()
+				loseScene.updateLastSceneScore(score);
+				loseScene.loadLoseScene();
+				k.go("loseScene")
+			play("hit")
+			addKaboom(hypocampus.pos)
+			music.pause();
+	}
 	loadJumpScene() { return k.scene("jumpScene", this.addJumpScene); }
 }
 

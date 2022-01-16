@@ -11,7 +11,6 @@ export default class Hypocampus{
             k.pos(k.center()),
             area(),
             body(),
-            
             {
                 speed: 250,
                 scale: this.scale,
