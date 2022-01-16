@@ -1,6 +1,6 @@
 import k from "../main.mjs";
 export default class Rock{
-    constructor({posX = (k.width()*2 / 3), posY =  k.height() / 2, scale = 0.6 * k.height() / 640, speed = 320 * k.height()/640, dir = LEFT} = {}){
+    constructor({posX = (k.width()*2 / 3), posY =  k.height() / 2, scale = 0.85 * k.height() / 640, speed = 320 * k.height()/640, dir = LEFT} = {}){
         this.posX = posX;
         this.posY = posY;
         this.rockdObj = NaN,

@@ -140,9 +140,13 @@ export default class JumpScene {
 			},
 		])
 
-		let rockObj = new Rock({posX: width() + (30*k.height()/640), posY:0})
-		rockObj.randomizeRockType();
-		let rock = rockObj.addRockObj();
+		let topRockObj = new Rock({posX: width() + (30*k.height()/640), posY:0})
+		topRockObj.randomizeRockType();
+		topRockObj.addRockObj();
+
+		let botRockObj = new Rock({posX: width() + (30*k.height()/640), posY:k.height()})
+		botRockObj.randomizeRockType();
+		botRockObj.addRockObj();
 
 		
 	}
