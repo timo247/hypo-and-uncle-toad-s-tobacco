@@ -3,6 +3,7 @@ import Hypocampus from "../objects/hypocampus.mjs";
 import Button from "../objects/button.mjs";
 import RestingHypo from "../objects/restingHypo.mjs";
 import Toad from "../objects/toad.js";
+import Loader from "../loader.mjs";
 
 export default class LoseScene {
     constructor({lastGameScore = 0} = {}) {
@@ -14,9 +15,8 @@ export default class LoseScene {
         console.log("score reçu:", lastSceneScore)
         this.lastGameScore = lastSceneScore
     }
+
     addLoseScene() {
-      
-        
 
         let startButton = new Button ({txt : "Restart", p : vec2( width()/2, height()*1/3), f : () => go("jumpScene")})
         let quitButton = new Button ({txt : "Quit", p : vec2(width()/2, height()*2/3), f : () => pause()})
@@ -29,8 +29,8 @@ export default class LoseScene {
 
         let restingToadObj = new Toad({resting: true});
         let restingToad = restingToadObj.addToadObj();
-        console.log(restingToadObj)
-        restingToad.play("toadIdle");
+        console.log(restingToad)
+        restingToad.play("idle");
 
             // display score
            let scoreText = add([

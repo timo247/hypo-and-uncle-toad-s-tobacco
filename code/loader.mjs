@@ -36,7 +36,7 @@ export default class Loader {
             },
         })
 
-        loadSprite("toad", "/sprites/toad.svg", {
+        let toadSprite = loadSprite("toad", "/sprites/toad.svg", {
             origin: k,
             //height: height(),
             "width": 700,
@@ -45,7 +45,7 @@ export default class Loader {
             sliceX: 7,
             // Define animations
             anims: {
-                "toadIdle": {
+                "idle": {
                     // Starts from frame 0, ends at frame 3
                     from: 0,
                     to: 6,
@@ -53,8 +53,9 @@ export default class Loader {
                     speed: 5,
                     loop: true,
                 }
-            }
+            },
         })
+        console.log(toadSprite)
 
         loadSprite("restingHypo", "sprites/hypo-pink.svg");
         loadSprite("salad", "sprites/salad.svg");
@@ -71,8 +72,6 @@ export default class Loader {
         //k.loadSound("tinySplash3", "../sounds/tiny-splash-3.mp3")
         k.loadSound("buble", "../sounds/bubble-one.mp3")
         k.loadSound("starsArpMusic", "../sounds/starsArpMusic.mp3")
-        //k.loadSound("antepsDedalMusic", "../sounds/antepsDedalMusic.mp3")
-        //k.loadSound("banbouGreenBrumeMusic", "../sounds/banbouGreenBrumeMusic.mp3")
 
     }
 };

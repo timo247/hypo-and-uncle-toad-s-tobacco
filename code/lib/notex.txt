@@ -1,2 +1,6 @@
-Ajouter le sol
-Ajouter la musique
+Créer svg algues
+            méduses
+            poissons
+            background dégradé
+            boules de fumée
+            

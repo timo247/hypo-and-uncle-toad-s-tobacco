@@ -8,6 +8,7 @@ import LoseScene from "./lose.mjs";
 import Ground from "../objects/ground.mjs";
 import {getScore} from "../objects/score.mjs"
 import Rock from "../objects/rock.js";
+import Loader from "../loader.mjs";
 
 export default class JumpScene {
 	constructor({ PIPE_OPEN = 240 * k.height()/640, PIPE_MIN = 60 * k.height()/640, JUMP_FORCE = 550 * k.height() / 640, SPEED = 320 * k.height()/640, CEILING = -60 * k.height()/640 } = {}) {
@@ -46,7 +47,7 @@ export default class JumpScene {
 		// jump
 		onKeyPress("space", () => {
 			hypocampus.jump(this.JUMP_FORCE)
-			console.log("jump")
+			//console.log("jump")
 				play("tinySplash")
 		})
 		// mobile
@@ -80,6 +81,9 @@ export default class JumpScene {
 			updateScore(score, scoreLabel);
 			k.destroy(salad);			
 			saladCounter.hasJustMoved = true;
+			if(score >= 5){
+				this.goWinScene(score, hypocampus, music);
+			}
 		})
 
 		// per frame event for all objects with tag 'pipe'
@@ -111,7 +115,7 @@ export default class JumpScene {
 		add([
 			pos(width(), 0),
 			rect(64, h1),
-			color(0, 127, 255),
+			color(130, 27, 128),
 			outline(4),
 			area(),
 			move(LEFT, this.SPEED),
@@ -126,7 +130,7 @@ export default class JumpScene {
 		add([
 			pos(width(), h1 + this.PIPE_OPEN),
 			rect(64, h2 * 640 / k.height()),
-			color(0, 127, 255),
+			color(130, 27, 128),
 			outline(4),
 			area(),
 			move(LEFT, this.SPEED),
@@ -135,7 +139,6 @@ export default class JumpScene {
 			"pipe",
 			// raw obj just assigns every field to the game obj
 			{ 
-				passed: false,
 				scale: k.height() / 640
 			},
 		])
@@ -156,6 +159,16 @@ export default class JumpScene {
 				loseScene.updateLastSceneScore(score);
 				loseScene.loadLoseScene();
 				k.go("loseScene")
+			play("hit")
+			addKaboom(hypocampus.pos)
+			music.pause();
+	}
+
+	goWinScene(score, hypocampus, music){
+		let loseScene = new LoseScene()
+				loseScene.updateLastSceneScore(score);
+				loseScene.loadLoseScene();
+				k.go("winScene")
 			play("hit")
 			addKaboom(hypocampus.pos)
 			music.pause();
