@@ -5,6 +5,7 @@ import movingSalad from "../objects/movingSalad.mjs";
 import { addScore } from "../objects/score.mjs";
 import { updateScore } from "../objects/score.mjs";
 import LoseScene from "./lose.mjs";
+import WinScene from "./win.mjs";
 import Ground from "../objects/ground.mjs";
 import {getScore} from "../objects/score.mjs"
 import Rock from "../objects/rock.js";
@@ -165,13 +166,10 @@ export default class JumpScene {
 	}
 
 	goWinScene(score, hypocampus, music){
-		let loseScene = new LoseScene()
-				loseScene.updateLastSceneScore(score);
-				loseScene.loadLoseScene();
+		let winScene = new WinScene()
+				winScene.updateLastSceneScore(score);
+				winScene.loadWinScene();
 				k.go("winScene")
-			play("hit")
-			addKaboom(hypocampus.pos)
-			music.pause();
 	}
 	loadJumpScene() { return k.scene("jumpScene", this.addJumpScene); }
 }

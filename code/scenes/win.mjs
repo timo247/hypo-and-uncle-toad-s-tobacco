@@ -4,10 +4,11 @@ import Button from "../objects/button.mjs";
 import RestingHypo from "../objects/restingHypo.mjs";
 import Toad from "../objects/toad.js";
 import Loader from "../loader.mjs";
+import marketingPrinciplesManager from "../objects/marketingPrinciplesManager.mjs";
 
 export default class WinScene {
     constructor({lastGameScore = 0} = {}) {
-        this.addLoseScene = this.addLoseScene.bind(this),
+        this.addWinScene = this.addWinScene.bind(this),
         this.lastGameScore = lastGameScore
     }
 
@@ -16,13 +17,15 @@ export default class WinScene {
         this.lastGameScore = lastSceneScore
     }
 
-    addLoseScene() {
+    addWinScene() {
 
         let startButton = new Button ({txt : "Recommencer", p : vec2( width()/2, height()*1/3), f : () => go("jumpScene")})
         let quitButton = new Button ({txt : "Quit", p : vec2(width()/2, height()*2/3), f : () => pause()})
         //console.log(startButton)
         startButton.addButton()
         quitButton.addButton()
+
+        let marketingPrincipleDisplayer = new marketingPrinciplesManager
 
         let restingHypo = new RestingHypo({scale: 3.4 * k.height() / 640});
         restingHypo.addRestingHypoObj()
@@ -42,7 +45,7 @@ export default class WinScene {
             ])*/
 
             let scoreText = add([
-                text("Marketing: ", this.lastGameScore),
+                text(marketingPrincipleDisplayer.pickupRandomPrinciple(), this.lastGameScore),
                 pos(width() / 2, height() / 2),
                 scale(3),
                 origin("center"),
@@ -60,8 +63,8 @@ export default class WinScene {
         
     }
 
-    loadLoseScene() {
-        return k.scene("loseScene", this.addLoseScene);
+    loadWinScene() {
+        return k.scene("winScene", this.addWinScene);
     }
 
 };
