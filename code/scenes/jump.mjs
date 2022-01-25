@@ -12,7 +12,7 @@ import Rock from "../objects/rock.js";
 import Loader from "../loader.mjs";
 
 export default class JumpScene {
-	constructor({ PIPE_OPEN = 240 * k.height()/640, PIPE_MIN = 60 * k.height()/640, JUMP_FORCE = 550 * k.height() / 640, SPEED = 320 * k.height()/640, CEILING = -60 * k.height()/640 } = {}) {
+	constructor({ PIPE_OPEN = 240 * k.height()/640, PIPE_MIN = 60 * k.height()/640, JUMP_FORCE = 550 * k.height() / 640, SPEED = 320 * k.height()/640, CEILING = -60 * k.height()/640, scoreToWin = 10 } = {}) {
 		this.PIPE_OPEN = PIPE_OPEN
 		this.PIPE_MIN = PIPE_MIN
 		this.JUMP_FORCE = JUMP_FORCE
@@ -20,7 +20,8 @@ export default class JumpScene {
 		this.CEILING = CEILING
 		this.addJumpScene = this.addJumpScene.bind(this)
 		this.spawnPipe = this.spawnPipe.bind(this)
-
+		this.pointsToEarnForWin = scoreToWin
+		this.playingMusic = false;
 	}
 
 	addJumpScene() {
@@ -29,19 +30,26 @@ export default class JumpScene {
 		// define gravity
 		gravity(3200 * height() / 640)
 
-		let music = k.play("starsArpMusic",{
-			loop: true
-		})
+
+		let music = "starsArpMusic";
+		if(!this.playingMusic){
+			 music = k.play("starsArpMusic",{
+				loop: true
+			})
+
+			this.playingMusic = true;
+		} 
+
 		let hypocampusObj = new Hypocampus;
 		let hypocampus = hypocampusObj.addHypocampusObj();
 		hypocampus.play("idle")
 
-		let saladCounter = new Salad({scale: 0.5 * k.height() / 640, posX: 60, posY: 60});
+		let saladCounter = new Salad({scale: 0.5 * k.height() / 640, posX: 70 * k.height() / 640, posY: 70 * k.height() / 640});
 		saladCounter.addSaladObj()
 		
 		console.log("hypo wiwdth",hypocampus.height)		
 		let score = 0;
-		let scoreLabel = addScore(score);
+		let scoreLabel = addScore(score, this.pointsToEarnForWin).scoreLabel;
 
 
 		// hypo movement
@@ -82,7 +90,7 @@ export default class JumpScene {
 			updateScore(score, scoreLabel);
 			k.destroy(salad);			
 			saladCounter.hasJustMoved = true;
-			if(score >= 5){
+			if(score > this.pointsToEarnForWin - 1){
 				this.goWinScene(score, hypocampus, music);
 			}
 		})

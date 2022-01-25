@@ -30,7 +30,7 @@ export default class LoseScene {
         let restingToadObj = new Toad({resting: true});
         let restingToad = restingToadObj.addToadObj();
         console.log(restingToad)
-        restingToad.play("idle");
+        //restingToad.play("idle");
 
             // display score
            let scoreText = add([

@@ -1,10 +1,7 @@
 import k from "../main.mjs";
-import Hypocampus from "../objects/hypocampus.mjs";
 import Button from "../objects/button.mjs";
 import RestingHypo from "../objects/restingHypo.mjs";
-import Toad from "../objects/toad.js";
-import Loader from "../loader.mjs";
-import marketingPrinciplesManager from "../objects/marketingPrinciplesManager.mjs";
+import MarketingPrinciplesManager from "../objects/marketingPrinciplesManager.mjs";
 
 export default class WinScene {
     constructor({lastGameScore = 0} = {}) {
@@ -19,48 +16,15 @@ export default class WinScene {
 
     addWinScene() {
 
-        let startButton = new Button ({txt : "Recommencer", p : vec2( width()/2, height()*1/3), f : () => go("jumpScene")})
-        let quitButton = new Button ({txt : "Quit", p : vec2(width()/2, height()*2/3), f : () => pause()})
-        //console.log(startButton)
+        let startButton = new Button ({txt : "Découvir autre chose avec DigiMarc", p : vec2( width()/2, height()*3/4), f : () => go("jumpScene"), scale: vec2(2), hoverScale: vec2(2.2)})
         startButton.addButton()
-        quitButton.addButton()
 
-        let marketingPrincipleDisplayer = new marketingPrinciplesManager
+        let marketingPrinciplesManager = new MarketingPrinciplesManager
+        console.log(marketingPrinciplesManager)
 
         let restingHypo = new RestingHypo({scale: 3.4 * k.height() / 640});
         restingHypo.addRestingHypoObj()
-
-        let restingToadObj = new Toad({resting: true});
-        let restingToad = restingToadObj.addToadObj();
-        console.log(restingToad)
-        restingToad.play("idle");
-
-            // display score
-            /*
-           let scoreText = add([
-                text("Score: ", this.lastGameScore),
-                pos(width() / 2, height() / 2),
-                scale(3),
-                origin("center"),
-            ])*/
-
-            let scoreText = add([
-                text(marketingPrincipleDisplayer.pickupRandomPrinciple(), this.lastGameScore),
-                pos(width() / 2, height() / 2),
-                scale(3),
-                origin("center"),
-            ])
-
-            console.log("scoreTExt", scoreText)
-
-            add([
-                text(this.lastGameScore),
-                pos(width() / 2 + (scoreText.width* 7 / 5), height() / 2),
-                scale(3),
-                origin("center"),
-            ])
-
-        
+        let marketingText = marketingPrinciplesManager.addText(marketingPrinciplesManager.pickupRandomPrinciple(), 15)
     }
 
     loadWinScene() {

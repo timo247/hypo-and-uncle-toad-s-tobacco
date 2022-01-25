@@ -64,6 +64,9 @@ export default class Loader {
         loadSprite("rock1", 'sprites/rock1.svg')
         loadSprite("rock2", 'sprites/rock2.svg')
         k.loadFont("unscii", "fonts/unscii_8x8.png", 24, 24);
+        //k.loadFont("cga", "fonts/cga.png", 8, 8, "éàè")
+        k.loadFont("cga", "fonts/cga.png", 8, 8, CP437_CHARS)
+        k.loadFont("cp437", "../fonts/cp437.png", 8, 8);
         k.loadSound("hit", "../sounds/heartImpact.wav")
         k.loadSound("woosh", "../sounds/airWoosh.wav")
         k.loadSound("enteringWaterSplash", "../sounds/entering-water.mp3")
