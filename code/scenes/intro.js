@@ -5,7 +5,7 @@ import RestingHypo from "../objects/restingHypo.mjs";
 export default class IntroScene {
     constructor({lastGameScore = 0} = {}) {
         this.addIntroScene = this.addIntroScene.bind(this),
-        this.introText = "Vous faites bien de passer par là !'\n' Voici DigiMarc, et il conaît tout un tas d'astuces marketing qui peuvent vous aider dans vos projets ! Il vous suffit d'appuyer sur espace sur ordinateur ou de toucher l'écran sur mobile pour le faire sauter et manger les fruits. Une fois rassasié, DigiMarc vous donnera un conseil marketing pertinent. DigiMark connaît pleins de choses, mais il a aussi très faim ! Pour 5 conseils, rassasiez Marc 5 fois, et pour 20 conseils, vous avez compris ..."
+        this.introText = "Vous faites bien de passer par là ! \n Voici DigiMarc, et il conaît tout un tas d'astuces marketing qui peuvent vous aider dans vos projets ! Il vous suffit d'appuyer sur espace sur ordinateur ou de toucher l'écran sur mobile pour le faire sauter et manger les fruits. Une fois rassasié, DigiMarc vous donnera un conseil marketing pertinent. DigiMark connaît pleins de choses, mais il a aussi très faim ! Pour 5 conseils, rassasiez Marc 5 fois, et pour 20 conseils, vous avez compris ..."
     }
 
 
@@ -14,6 +14,12 @@ export default class IntroScene {
         let startButton = new Button ({txt : "Continuer", p : vec2( width()/2, height()*3/4), f : () => go("jumpScene"), scale: vec2(3), hoverScale: vec2(3.6), isHovering: true})
         startButton.addButton()
 
+        this.introText = this.introText.replaceAll('é', 'e') 
+        this.introText = this.introText.replaceAll('è', 'e')
+        this.introText = this.introText.replaceAll('à', 'a')
+        this.introText = this.introText.replaceAll('ê', 'e') 
+        this.introText = this.introText.replaceAll('ù', 'u')
+        this.introText = this.introText.replaceAll('ç', 'c')
 
         let restingHypo = new RestingHypo({scale: 3.4 * k.height() / 640});
         restingHypo.addRestingHypoObj()

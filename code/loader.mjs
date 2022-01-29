@@ -36,6 +36,7 @@ export default class Loader {
             },
         })
 
+
         let toadSprite = loadSprite("toad", "/sprites/toad.svg", {
             origin: k,
             //height: height(),
@@ -56,6 +57,29 @@ export default class Loader {
             },
         })
         console.log(toadSprite)
+        
+
+
+
+        k.loadSprite("digiMarc", "sprites/stratmarc-talking.png", {
+            origin: k,
+            //height: height(),
+            "width": 700,
+
+            // The image contains 9 frames layed out horizontally, slice it into individual frames
+            sliceX: 12,
+            // Define animations
+            anims: {
+                "talk": {
+                    // Starts from frame 0, ends at frame 3
+                    from: 0,
+                    to: 11,
+                    // Frame per second
+                    speed: 5,
+                    loop: true,
+                }
+            },
+        })
 
         loadSprite("restingHypo", "sprites/hypo-pink.svg");
         loadSprite("salad", "sprites/salad.svg");
@@ -65,8 +89,9 @@ export default class Loader {
         loadSprite("rock2", 'sprites/rock2.svg')
         k.loadFont("unscii", "fonts/unscii_8x8.png", 24, 24);
         //k.loadFont("cga", "fonts/cga.png", 8, 8, "éàè")
-        k.loadFont("cga", "fonts/cga.png", 8, 8, CP437_CHARS)
-        k.loadFont("cp437", "../fonts/cp437.png", 8, 8);
+        k.loadFont("cga", "fonts/cga.png",8,8,CP437_CHARS)
+        k.loadFont("cp437", "../fonts/cp437.png", 8, 8, CP437_CHARS);
+        k.loadFont("drake", "../fonts/drake_10x10.png", 10, 10, CP437_CHARS);
         k.loadSound("hit", "../sounds/heartImpact.wav")
         k.loadSound("woosh", "../sounds/airWoosh.wav")
         k.loadSound("enteringWaterSplash", "../sounds/entering-water.mp3")

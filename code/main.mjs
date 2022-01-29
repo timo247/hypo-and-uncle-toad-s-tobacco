@@ -46,6 +46,6 @@ let introScene = new IntroScene
 introScene.loadIntroScene()
 
 
-k.go("introScene");
+k.go("winScene");
 kaboomCanvas.focus()
 
