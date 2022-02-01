@@ -1,15 +1,20 @@
 import k from "../main.mjs";
-export default class DigiMarc{
-    constructor({scale = 1.3 * k.height() / 640, pos = vec2( width()/2, height()*3/4) } = {}){
+export default class Buble{
+    constructor({scale = 0.25 * k.height() / 640, pos = vec2( width()/2, height()*3/4), speed = 320 * k.height()/640, dir = LEFT } = {}){
         this.scale = scale,
-        this.pos = pos
+        this.pos = pos,
+        this.speed = speed,
+        this.dir = dir
     }
 
-    addDigiMarcObj(){
-        const digiMarc = k.add([
-            k.sprite("digiMarc"),
+    addBubleObj(){
+        const buble = k.add([
+            k.sprite("buble"),
             k.origin("center"),
             k.pos(this.pos),
+            move(LEFT, this.speed),
+            area(),
+            cleanup(),
             {
                 speed: 250,
                 scale: this.scale,
@@ -19,8 +24,8 @@ export default class DigiMarc{
                // height: 46.7 / height(),
                 //width: 395.1 / width(),
             },            
-            "digiMarc"
+            "buble"
         ]);    
-        return digiMarc;
+        return buble;
     }
 }

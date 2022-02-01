@@ -10,6 +10,8 @@ import Ground from "../objects/ground.mjs";
 import {getScore} from "../objects/score.mjs"
 import Rock from "../objects/rock.js";
 import Loader from "../loader.mjs";
+import Buble from "../objects/Buble.js";
+import SeaWeed from "../objects/SeaWeed.js";
 
 export default class JumpScene {
 	constructor({ PIPE_OPEN = 240 * k.height()/640, PIPE_MIN = 60 * k.height()/640, JUMP_FORCE = 550 * k.height() / 640, SPEED = 320 * k.height()/640, CEILING = -60 * k.height()/640, scoreToWin = 10 } = {}) {
@@ -79,6 +81,15 @@ export default class JumpScene {
 			this.spawnPipe()
 		})
 
+		loop(3, () => {
+
+			let n = randi(0,10)
+
+			if(n%2 == 0 || n%7 == 0){
+				this.spawnSeaWeed()
+			}
+		})
+
 
 		// callback when hypo onCollide with objects with tag "pipe"
 		k.onCollide("player", "pipe", () => {
@@ -121,6 +132,9 @@ export default class JumpScene {
 		let salad = new movingSalad({posX: width(), posY: saladPos, speed : this.SPEED, dir: LEFT})
 		salad.addSaladObj();
 
+	
+
+
 		add([
 			pos(width(), 0),
 			rect(64, h1),
@@ -160,7 +174,18 @@ export default class JumpScene {
 		botRockObj.randomizeRockType();
 		botRockObj.addRockObj();
 
-		
+			let bubleObj = new Buble({pos: vec2( rand(0, k.width()),rand(0, k.height())) });
+			let buble = bubleObj.addBubleObj();
+			buble.play("pop");	
+			
+	
+	}
+
+
+	spawnSeaWeed(){
+		let seaWeedObj = new SeaWeed({pos: vec2( k.width(), k.height() - 100) });
+		let seaWeed = seaWeedObj.addSeaWeedObj();
+		seaWeed.play("idle");
 	}
 
 	goLoseScene(score, hypocampus, music){
@@ -170,7 +195,7 @@ export default class JumpScene {
 				k.go("loseScene")
 			play("hit")
 			addKaboom(hypocampus.pos)
-			music.pause();
+			//music.pause();
 	}
 
 	goWinScene(score, hypocampus, music){

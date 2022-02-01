@@ -6,9 +6,9 @@ export default class MarketingPrinciplesManager {
         this.principles = [
         "Une stratégie marketing commence par identifier la raison d'être du projet. Si vous n'êtes pas capable de formuler une prase du type 'Nous faisons X pour y, parce que Z', c'est le moment de vous y mettre.",
         "Il est pertinent de formuler la mission de son projet en mentionnant ce qu'il apporte, à qui il est destiné et pourquoi il a été développé.",
-        "L'e-marque n'existe que sur le net, et permet ainsi de se départir de l'image initiale de la marque pour mieux servir les objectifs du projet. L'e-marque peut être très utile en E-commerce. On peut aussi simplement extendre la marque, déjà présente sur les marchés traditionnels, en ajoutant des canneaux de communication web, qui portent généralement le nom de la marque. ",
-        "Un socionaute est un consommateur qui souhaite rêver. Il veut bénéficier d'expertise, et s'offrir quelque chose qui lui permette d'exister davantage.",
-        "Les socionautes sont plus intéressés par les personnes que par les entreprises. Une présence digitale forte, c'est une représentation humaine de la marque, et donc une implication de comptes personnels."
+        "L'e-marque n'existe que sur le net, et permet ainsi de se départir de l'image initiale de la marque pour mieux servir les objectifs du projet. L'e-marque peut être très utile en E-commerce. ",
+        "Un socionaute est un consommateur qui souhaite rêver. Il veut bénéficier d'expertise, et s'offrir quelque chose qui lui permette de représenter ses valeurs et d'exprimer qui il veut être.",
+        "Les socionautes sont plus intéressés par les personnes que par les entreprises. Une présence digitale forte, c'est une représentation humaine de la marque, donc des personnes représentant la marque qui s'adressent aux clients avec leurs comptes personnels."
     ],
     this.principles2 = []         
     }

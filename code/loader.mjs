@@ -61,7 +61,7 @@ export default class Loader {
 
 
 
-        k.loadSprite("digiMarc", "sprites/stratmarc-talking.png", {
+        k.loadSprite("digiMarc", "sprites/digiMarc.png", {
             origin: k,
             //height: height(),
             "width": 700,
@@ -74,6 +74,48 @@ export default class Loader {
                     // Starts from frame 0, ends at frame 3
                     from: 0,
                     to: 11,
+                    // Frame per second
+                    speed: 5,
+                    loop: false,
+                }
+            },
+        })
+
+
+        k.loadSprite("buble", "sprites/bubles.png", {
+            origin: k,
+            //height: height(),
+            "width": 700,
+
+            // The image contains 9 frames layed out horizontally, slice it into individual frames
+            sliceX: 4,
+            sliceY: 4,
+            // Define animations
+            anims: {
+                "pop": {
+                    // Starts from frame 0, ends at frame 3
+                    from: 0,
+                    to: 15,
+                    // Frame per second
+                    speed: 5,
+                    loop: false,
+                }
+            },
+        })
+
+        k.loadSprite("seaWeed", "sprites/seaWeed.png", {
+            origin: k,
+            //height: height(),
+            "width": 700,
+
+            // The image contains 9 frames layed out horizontally, slice it into individual frames
+            sliceX: 4,
+            // Define animations
+            anims: {
+                "idle": {
+                    // Starts from frame 0, ends at frame 3
+                    from: 0,
+                    to: 3,
                     // Frame per second
                     speed: 5,
                     loop: true,
