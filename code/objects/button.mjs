@@ -18,6 +18,7 @@ export default class Button {
             area({ cursor: "pointer", }),
             scale(1),
             origin("center"),
+            z(5)
         ])
 
         

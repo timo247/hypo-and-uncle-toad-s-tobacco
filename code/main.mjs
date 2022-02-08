@@ -25,7 +25,7 @@ const k = kaboom({
     font: "sinko",
     canvas: kaboomCanvas,
     //background: [104, 104, 130,],
-    background: ("black")
+    background: (29, 40, 64)
 })
 console.log("kboom width:", width())
 console.log("kboom height:", height())
@@ -40,7 +40,7 @@ let menu = new Menu
 jumpScene.loadJumpScene();
 loseScene.loadLoseScene();
 menu.loadMenu();
-let winScene = new WinScene
+let winScene = new WinScene({musicStarted: false})
 winScene.loadWinScene()
 let introScene = new IntroScene
 introScene.loadIntroScene()

@@ -1,6 +1,7 @@
 import k from "../main.mjs";
 import Button from "../objects/button.mjs";
 import RestingHypo from "../objects/restingHypo.mjs";
+import JumpScene from "./jump.mjs";
 
 export default class IntroScene {
     constructor({lastGameScore = 0} = {}) {
@@ -24,6 +25,7 @@ export default class IntroScene {
         let restingHypo = new RestingHypo({scale: 3.4 * k.height() / 640});
         restingHypo.addRestingHypoObj()
         this.addText(this.introText, 15)
+
     }
 
     loadIntroScene() {

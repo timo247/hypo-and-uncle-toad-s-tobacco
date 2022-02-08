@@ -3,11 +3,13 @@ import Button from "../objects/button.mjs";
 import RestingHypo from "../objects/restingHypo.mjs";
 import MarketingPrinciplesManager from "../objects/marketingPrinciplesManager.mjs";
 import DigiMarc from "../objects/Digimarc.js";
+import JumpScene from "./jump.mjs";
 
 export default class WinScene {
-    constructor({lastGameScore = 0} = {}) {
+    constructor({lastGameScore = 0, musicStarted = true} = {}) {
         this.addWinScene = this.addWinScene.bind(this),
-        this.lastGameScore = lastGameScore
+        this.lastGameScore = lastGameScore,
+        this.musicStarted = musicStarted
     }
 
     updateLastSceneScore (lastSceneScore){
@@ -30,6 +32,28 @@ export default class WinScene {
         digiMarc.play("talk");
         //restingHypo.addRestingHypoObj()
         let marketingText = marketingPrinciplesManager.addText(marketingPrinciplesManager.pickupRandomPrinciple(), 15)
+
+
+        let muteSoundButton = new Button ({txt : "Son [M]", p : vec2( width() - 100 * k.height() / 640, 100 * k.height() / 640), f : () => k.volume() == 1 ? k.volume(0): k.volume(1)})
+        muteSoundButton.addButton()
+
+
+        onKeyPress("m", () => {
+            k.volume() == 1 ? k.volume(0): k.volume(1)
+            })  
+   
+        onKeyPress("M", () => {
+            k.volume() == 1 ? k.volume(0): k.volume(1)
+             })  
+
+        
+        onKeyPress("space", () => {
+            console.log("space pressed")
+            let jumpScene = new JumpScene({playingMusic: this.musicStarted})
+            jumpScene.loadJumpScene();
+            k.go("jumpScene")
+  
+         })
     }
 
     loadWinScene() {

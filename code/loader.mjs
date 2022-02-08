@@ -8,7 +8,7 @@ export default class Loader {
              origin: k
          });
          */
-        loadSprite("hypocampus", "/sprites/hypos-8-red.svg", {
+        loadSprite("hypocampus", "/sprites/hypo-8.png", {
             origin: k,
             //height: height(),
             "width": 700,
@@ -124,11 +124,12 @@ export default class Loader {
         })
 
         loadSprite("restingHypo", "sprites/hypo-pink.svg");
-        loadSprite("salad", "sprites/salad.svg");
+        loadSprite("fish", "sprites/fish-flappy.png");
+        loadSprite("salad", "sprites/peach.png");
         loadSprite("ground", "sprites/ground.svg");
         loadSprite("toad", "sprites/toad.svg")
-        loadSprite("rock1", 'sprites/rock1.svg')
-        loadSprite("rock2", 'sprites/rock2.svg')
+        loadSprite("rock1", 'sprites/rock1.png')
+        loadSprite("rock2", 'sprites/rock2.png')
         k.loadFont("unscii", "fonts/unscii_8x8.png", 24, 24);
         //k.loadFont("cga", "fonts/cga.png", 8, 8, "éàè")
         k.loadFont("cga", "fonts/cga.png",8,8,CP437_CHARS)

@@ -12,9 +12,10 @@ import Rock from "../objects/rock.js";
 import Loader from "../loader.mjs";
 import Buble from "../objects/Buble.js";
 import SeaWeed from "../objects/SeaWeed.js";
+import Button from "../objects/button.mjs";
 
 export default class JumpScene {
-	constructor({ PIPE_OPEN = 240 * k.height()/640, PIPE_MIN = 60 * k.height()/640, JUMP_FORCE = 550 * k.height() / 640, SPEED = 320 * k.height()/640, CEILING = -60 * k.height()/640, scoreToWin = 10 } = {}) {
+	constructor({ PIPE_OPEN = 240 * k.height()/640, PIPE_MIN = 60 * k.height()/640, JUMP_FORCE = 550 * k.height() / 640, SPEED = 320 * k.height()/640, CEILING = -60 * k.height()/640, scoreToWin = 10, playingMusic = false } = {}) {
 		this.PIPE_OPEN = PIPE_OPEN
 		this.PIPE_MIN = PIPE_MIN
 		this.JUMP_FORCE = JUMP_FORCE
@@ -23,7 +24,7 @@ export default class JumpScene {
 		this.addJumpScene = this.addJumpScene.bind(this)
 		this.spawnPipe = this.spawnPipe.bind(this)
 		this.pointsToEarnForWin = scoreToWin
-		this.playingMusic = false;
+		this.playingMusic = playingMusic;
 	}
 
 	addJumpScene() {
@@ -115,6 +116,19 @@ export default class JumpScene {
 			}
 		})
 
+		let muteSoundButton = new Button ({txt : "Son [M]", p : vec2( width() - 100 * k.height() / 640, 100 * k.height() / 640), f : () => k.volume() == 1 ? k.volume(0): k.volume(1)})
+        muteSoundButton.addButton()
+
+
+        onKeyPress("m", () => {
+            k.volume() == 1 ? k.volume(0): k.volume(1)
+            })  
+   
+        onKeyPress("M", () => {
+            k.volume() == 1 ? k.volume(0): k.volume(1)
+             })  
+
+
 	}
 
 	spawnPipe() {
@@ -138,7 +152,7 @@ export default class JumpScene {
 		add([
 			pos(width(), 0),
 			rect(64, h1),
-			color(130, 27, 128),
+			color(80, 65, 160),
 			outline(4),
 			area(),
 			move(LEFT, this.SPEED),
@@ -153,7 +167,7 @@ export default class JumpScene {
 		add([
 			pos(width(), h1 + this.PIPE_OPEN),
 			rect(64, h2 * 640 / k.height()),
-			color(130, 27, 128),
+			color(80, 65, 160),
 			outline(4),
 			area(),
 			move(LEFT, this.SPEED),
@@ -183,7 +197,7 @@ export default class JumpScene {
 
 
 	spawnSeaWeed(){
-		let seaWeedObj = new SeaWeed({pos: vec2( k.width(), k.height() - 100) });
+		let seaWeedObj = new SeaWeed({pos: vec2( k.width(), k.height() - (25*k.height()/640)) });
 		let seaWeed = seaWeedObj.addSeaWeedObj();
 		seaWeed.play("idle");
 	}
