@@ -6,16 +6,13 @@ import { addScore } from "../objects/score.mjs";
 import { updateScore } from "../objects/score.mjs";
 import LoseScene from "./lose.mjs";
 import WinScene from "./win.mjs";
-import Ground from "../objects/ground.mjs";
-import {getScore} from "../objects/score.mjs"
 import Rock from "../objects/rock.js";
-import Loader from "../loader.mjs";
 import Buble from "../objects/Buble.js";
 import SeaWeed from "../objects/SeaWeed.js";
 import Button from "../objects/button.mjs";
 
 export default class JumpScene {
-	constructor({ PIPE_OPEN = 240 * k.height()/640, PIPE_MIN = 60 * k.height()/640, JUMP_FORCE = 550 * k.height() / 640, SPEED = 320 * k.height()/640, CEILING = -60 * k.height()/640, scoreToWin = 10, playingMusic = false } = {}) {
+	constructor({ PIPE_OPEN = k.height()*9/20, PIPE_MIN = 60 * k.height()/640, JUMP_FORCE = 550 * k.height() / 640, SPEED = 320 * k.height()/640, CEILING = -60 * k.height()/640, scoreToWin = 10, playingMusic = false } = {}) {
 		this.PIPE_OPEN = PIPE_OPEN
 		this.PIPE_MIN = PIPE_MIN
 		this.JUMP_FORCE = JUMP_FORCE
@@ -43,11 +40,11 @@ export default class JumpScene {
 			this.playingMusic = true;
 		} 
 
-		let hypocampusObj = new Hypocampus;
-		let hypocampus = hypocampusObj.addHypocampusObj();
+		const hypocampusObj = new Hypocampus;
+		const hypocampus = hypocampusObj.addHypocampusObj();
 		hypocampus.play("idle")
 
-		let saladCounter = new Salad({scale: 0.5 * k.height() / 640, posX: 70 * k.height() / 640, posY: 70 * k.height() / 640});
+		const saladCounter = new Salad({scale: 0.5 * k.height() / 640, posX: 70 * k.height() / 640, posY: 70 * k.height() / 640});
 		saladCounter.addSaladObj()
 		
 		console.log("hypo wiwdth",hypocampus.height)		
@@ -59,14 +56,13 @@ export default class JumpScene {
 		// jump
 		onKeyPress("space", () => {
 			hypocampus.jump(this.JUMP_FORCE)
-			//console.log("jump")
 				play("tinySplash")
 		})
-		// mobile
-		onClick(() => {
+		//mobile
+		onTouchStart((id, pos) => {
 			hypocampus.jump(this.JUMP_FORCE)
 			play("tinySplash")
-		})
+        })
 
 
 		// check for fall death
@@ -83,9 +79,7 @@ export default class JumpScene {
 		})
 
 		loop(3, () => {
-
 			let n = randi(0,10)
-
 			if(n%2 == 0 || n%7 == 0){
 				this.spawnSeaWeed()
 			}
@@ -109,16 +103,13 @@ export default class JumpScene {
 
 		// per frame event for all objects with tag 'pipe'
 		onUpdate("pipe", (p) => {
-			// check if bean passed the pipe
 			if (p.pos.x + p.width <= hypocampus.pos.x && p.passed === false) {
-				//score = updateScore(score, scoreLabel)
 				p.passed = true
 			}
 		})
 
-		let muteSoundButton = new Button ({txt : "Son [M]", p : vec2( width() - 100 * k.height() / 640, 100 * k.height() / 640), f : () => k.volume() == 1 ? k.volume(0): k.volume(1)})
+		const muteSoundButton = new Button ({txt : "Son [M]", p : vec2( width() - 100 * k.height() / 640, 100 * k.height() / 640), f : () => k.volume() == 1 ? k.volume(0): k.volume(1)})
         muteSoundButton.addButton()
-
 
         onKeyPress("m", () => {
             k.volume() == 1 ? k.volume(0): k.volume(1)
@@ -137,16 +128,9 @@ export default class JumpScene {
 		const h1 = rand(this.PIPE_MIN, k.height() - this.PIPE_MIN - this.PIPE_OPEN)
 		const h2 = k.height() - h1 - this.PIPE_OPEN
 
-
-		console.log("h1", h1)
-		console.log("h2", h2)
-
 		let saladPos = h1 + (0.5 * this.PIPE_OPEN);
-		console.log("saladpos", saladPos)
-		let salad = new movingSalad({posX: width(), posY: saladPos, speed : this.SPEED, dir: LEFT})
+		const salad = new movingSalad({posX: width(), posY: saladPos, speed : this.SPEED, dir: LEFT})
 		salad.addSaladObj();
-
-	
 
 
 		add([
@@ -180,16 +164,16 @@ export default class JumpScene {
 			},
 		])
 
-		let topRockObj = new Rock({posX: width() + (30*k.height()/640), posY:0})
+		const topRockObj = new Rock({posX: width() + (30*k.height()/640), posY:0})
 		topRockObj.randomizeRockType();
 		topRockObj.addRockObj();
 
-		let botRockObj = new Rock({posX: width() + (30*k.height()/640), posY:k.height()})
+		const botRockObj = new Rock({posX: width() + (30*k.height()/640), posY:k.height()})
 		botRockObj.randomizeRockType();
 		botRockObj.addRockObj();
 
-			let bubleObj = new Buble({pos: vec2( rand(0, k.width()),rand(0, k.height())) });
-			let buble = bubleObj.addBubleObj();
+			const bubleObj = new Buble({pos: vec2( rand(0, k.width()),rand(0, k.height())) });
+			const buble = bubleObj.addBubleObj();
 			buble.play("pop");	
 			
 	
@@ -197,23 +181,22 @@ export default class JumpScene {
 
 
 	spawnSeaWeed(){
-		let seaWeedObj = new SeaWeed({pos: vec2( k.width(), k.height() - (25*k.height()/640)) });
-		let seaWeed = seaWeedObj.addSeaWeedObj();
+		const seaWeedObj = new SeaWeed({pos: vec2( k.width(), k.height() - (25*k.height()/640)) });
+		const seaWeed = seaWeedObj.addSeaWeedObj();
 		seaWeed.play("idle");
 	}
 
 	goLoseScene(score, hypocampus, music){
-		let loseScene = new LoseScene()
+		const loseScene = new LoseScene()
 				loseScene.updateLastSceneScore(score);
 				loseScene.loadLoseScene();
 				k.go("loseScene")
 			play("hit")
 			addKaboom(hypocampus.pos)
-			//music.pause();
 	}
 
 	goWinScene(score, hypocampus, music){
-		let winScene = new WinScene()
+		const winScene = new WinScene()
 				winScene.updateLastSceneScore(score);
 				winScene.loadWinScene();
 				k.go("winScene")

@@ -8,16 +8,6 @@ import Menu from "./scenes/menu.mjs";
 import WinScene from "./scenes/win.mjs";
 
 let kaboomCanvas = document.querySelector("#myCanvas")
-console.log("client width",document.body.clientWidth);
-
-console.log(document.querySelector("canvas"))
-console.log("window height",document.querySelector("canvas").clientHeight);
-
-/*
-let ctx = kaboomCanvas.getContext('2d');
-let clientWidth = ctx.canvas.clientWidth;
-console.log(clientWidth)
-*/
 const k = kaboom({
     width: kaboomCanvas.clientWidth ,
     height: kaboomCanvas.clientHeight ,
@@ -27,8 +17,7 @@ const k = kaboom({
     //background: [104, 104, 130,],
     background: (29, 40, 64)
 })
-console.log("kboom width:", width())
-console.log("kboom height:", height())
+
 
 export default k;
 let loader = new Loader

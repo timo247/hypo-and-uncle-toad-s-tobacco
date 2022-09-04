@@ -2,26 +2,27 @@ import k from "../main.mjs"
 
 export default class Button {
 
-    constructor({txt = "Start", p = vec2(200, 100), f = () => console.log("oh hi"), scale = vec2(1), hoverScale = vec2(1.2), isHovering = false} = {}){
+    constructor({ txt = "Start", p = vec2(200, 100), f = () => console.log("oh hi"), scale = vec2(1), hoverScale = vec2(1.2), isHovering = false } = {}) {
         this.txt = txt,
-        this.p = p,
-        this.f = f,
-        this.hoverScale = hoverScale,
-        this.scale = scale,
-        this.isHovering = isHovering
+            this.p = p,
+            this.f = f,
+            this.hoverScale = hoverScale,
+            this.scale = scale,
+            this.isHovering = isHovering
     }
 
-    addButton(){
+    addButton() {
         const btn = add([
             text(this.txt),
             pos(this.p),
-            area({ cursor: "pointer", }),
+            area(),
             scale(1),
             origin("center"),
+            "action_button",
             z(5)
         ])
 
-        
+
         btn.onUpdate(() => {
             if (btn.isHovering() || this.isHovering) {
                 const t = time() * 10
@@ -34,13 +35,18 @@ export default class Button {
             } else {
                 btn.scale = this.scale
                 btn.color = rgb()
-            }            
+            }
         })
-        btn.onClick(this.f)
+        onTouchEnd((id, pos) => {
+            if (btn.hasPoint(pos)) {
+                return this.f()
+            }
+        })
 
-    
+        btn.onClick(() => this.f())
+
     }
 
-	
+
 }
 

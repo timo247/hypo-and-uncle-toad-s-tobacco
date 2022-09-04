@@ -17,10 +17,8 @@ export default class Menu {
             loop: true
         })*/
             let startButton = new Button ({txt : "Start", p : vec2( width()/2, height()*1/3), f : () => {/*music.pause();*/ go("jumpScene")}})
-            let quitButton = new Button ({txt : "Quit", p : vec2(width()/2, height()*2/3), f : () => pause()})
             //console.log(startButton)
             startButton.addButton()
-            quitButton.addButton()
 
             let restingHypo = new RestingHypo({scale: 3.4 * k.height() / 640});
             restingHypo.addRestingHypoObj()

@@ -5,11 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hypocampus and uncle toad's tobaco</title>
-    <script type="module" defer src="code/main.mjs"></script>
+    <h1>Mini Kboom-Js flappy bird with hand-made animations</h1>
+    <h2>About</h2>
+    <p>This is a mini game made with the javascript library Kaboom. The source code can be found on this github repository. You may find the mobile version very difficult, since the game has primarly been designed for desktop purpose. Pay attention to the fact that as soon as you press enter or click "rejouer", the game starts.</p>
+    <h2>Commands</h2>
+    <ul>
+        <li>
+            <span>Space: jump (desktop)</span>
+            <span>M: mute/unmute sound (desktop)</span>
+            <span>Touch: jump (mobile)</span>
+        </li>
+        <li>
+            <span>M: mute/unmute sound (desktop)</span>
+        </li>
+        <li>
+            <span>Touch: jump (mobile)</span>
+        </li>
+    </ul>
+    <script type="module" defer src="./code/main.mjs"></script>
     <style>
         #myCanvas {
-            height: 557/1254vw;
+           /* height: 557/1254vw; */
+           height: 100vh;
             width: 100vw;
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+             -khtml-user-select: none; /* Konqueror HTML */
+               -moz-user-select: none; /* Old versions of Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                    user-select: none; /* Non-prefixed version, currently
+                                          supported by Chrome, Opera and Firefox */
+        }
+
+        #myCanvas:focus {
+            box-shadow: none;
+            outline: none;
         }
     </style>
 </head>

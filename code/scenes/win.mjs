@@ -19,23 +19,13 @@ export default class WinScene {
 
     addWinScene() {
 
-        let startButton = new Button ({txt : "Apprendre autre chose avec DigiMarc", p : vec2( width()/2, height()*3/4), f : () => go("jumpScene"), scale: vec2(2), hoverScale: vec2(2.2)})
+        const startButton = new Button ({txt : "Rejouer \n (touche enter)", p : vec2( width()/2, height()*3/4), f : () => go("jumpScene"), scale: vec2(2), hoverScale: vec2(2.2)})
         startButton.addButton()
-
-        let marketingPrinciplesManager = new MarketingPrinciplesManager
-        marketingPrinciplesManager.transformSpecialChars()
-        console.log(marketingPrinciplesManager)
-
-        let restingHypo = new RestingHypo({scale: 3.4 * k.height() / 640});
-        let digiMarcObj = new DigiMarc({scale:3.4* k.height() / 640, pos : vec2( width()/2, height()*1/3)});
-        let digiMarc = digiMarcObj.addDigiMarcObj();
-        digiMarc.play("talk");
-        //restingHypo.addRestingHypoObj()
-        let marketingText = marketingPrinciplesManager.addText(marketingPrinciplesManager.pickupRandomPrinciple(), 15)
-
-
-        let muteSoundButton = new Button ({txt : "Son [M]", p : vec2( width() - 100 * k.height() / 640, 100 * k.height() / 640), f : () => k.volume() == 1 ? k.volume(0): k.volume(1)})
+        const textButton = new Button ({txt : "Apprendre autre chose \n (touche espace)", p : vec2( width()/2, height()*5/6), f : () =>{ this.resetText()}, scale: vec2(2), hoverScale: vec2(2.2)})
+        textButton.addButton()
+        const muteSoundButton = new Button ({txt : "Son [M]", p : vec2( width() - 100 * k.height() / 640, 100 * k.height() / 640), f : () => k.volume() == 1 ? k.volume(0): k.volume(1)})
         muteSoundButton.addButton()
+        this.resetText()
 
 
         onKeyPress("m", () => {
@@ -47,13 +37,26 @@ export default class WinScene {
              })  
 
         
-        onKeyPress("space", () => {
-            console.log("space pressed")
-            let jumpScene = new JumpScene({playingMusic: this.musicStarted})
+        onKeyPress("enter", () => {
+            const jumpScene = new JumpScene({playingMusic: this.musicStarted})
             jumpScene.loadJumpScene();
             k.go("jumpScene")
   
          })
+
+         onKeyPress("space", () => {
+            this.resetText()
+         })
+    }
+
+    resetText() {
+        k.every("marketing_text", k.destroy)
+        const marketingPrinciplesManager = new MarketingPrinciplesManager
+        marketingPrinciplesManager.transformSpecialChars()
+        marketingPrinciplesManager.addText(marketingPrinciplesManager.pickupRandomPrinciple(), 15)
+        const digiMarcObj = new DigiMarc({scale:3.4* k.height() / 640, pos : vec2( width()/2 + 25, height()*1/3)});
+        const digiMarc = digiMarcObj.addDigiMarcObj();
+        digiMarc.play("talk");
     }
 
     loadWinScene() {

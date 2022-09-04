@@ -1,18 +1,12 @@
-import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
 import k from "./main.mjs";
 export default class Loader {
     constructor() {
     }
     loadAssets() {
-        /* k.loadSprite("hypocampus", "sprites/Hypo-pink.svg", {
-             origin: k
-         });
-         */
-        loadSprite("hypocampus", "/sprites/hypo-8.png", {
+        loadSprite("hypocampus", "sprites/hypo-8.png", {
             origin: k,
             //height: height(),
             "width": 700,
-
             // The image contains 9 frames layed out horizontally, slice it into individual frames
             sliceX: 8,
             // Define animations
@@ -37,12 +31,11 @@ export default class Loader {
         })
 
 
-        let toadSprite = loadSprite("toad", "/sprites/toad.svg", {
+        let toadSprite = loadSprite("toad", "sprites/toad.svg", {
             origin: k,
             //height: height(),
             "width": 700,
-
-            // The image contains 9 frames layed out horizontally, slice it into individual frames
+             // The image contains 9 frames layed out horizontally, slice it into individual frames
             sliceX: 7,
             // Define animations
             anims: {
@@ -56,11 +49,7 @@ export default class Loader {
                 }
             },
         })
-        console.log(toadSprite)
         
-
-
-
         k.loadSprite("digiMarc", "sprites/digiMarc.png", {
             origin: k,
             //height: height(),
@@ -86,7 +75,6 @@ export default class Loader {
             origin: k,
             //height: height(),
             "width": 700,
-
             // The image contains 9 frames layed out horizontally, slice it into individual frames
             sliceX: 4,
             sliceY: 4,
@@ -107,7 +95,6 @@ export default class Loader {
             origin: k,
             //height: height(),
             "width": 700,
-
             // The image contains 9 frames layed out horizontally, slice it into individual frames
             sliceX: 4,
             // Define animations
@@ -125,24 +112,24 @@ export default class Loader {
 
         loadSprite("restingHypo", "sprites/hypo-pink.svg");
         loadSprite("fish", "sprites/fish-flappy.png");
-        loadSprite("salad", "sprites/peach.png");
+        loadSprite("salad", "sprites/salad.svg");
         loadSprite("ground", "sprites/ground.svg");
         loadSprite("toad", "sprites/toad.svg")
         loadSprite("rock1", 'sprites/rock1.png')
         loadSprite("rock2", 'sprites/rock2.png')
         k.loadFont("unscii", "fonts/unscii_8x8.png", 24, 24);
-        //k.loadFont("cga", "fonts/cga.png", 8, 8, "éàè")
+
         k.loadFont("cga", "fonts/cga.png",8,8,CP437_CHARS)
-        k.loadFont("cp437", "../fonts/cp437.png", 8, 8, CP437_CHARS);
-        k.loadFont("drake", "../fonts/drake_10x10.png", 10, 10, CP437_CHARS);
-        k.loadSound("hit", "../sounds/heartImpact.wav")
-        k.loadSound("woosh", "../sounds/airWoosh.wav")
-        k.loadSound("enteringWaterSplash", "../sounds/entering-water.mp3")
-        k.loadSound("tinySplash", "../sounds/tiny-splash.mp3")
-        //k.loadSound("tinySplash2", "../sounds/tiny-splash-2.mp3")
-        //k.loadSound("tinySplash3", "../sounds/tiny-splash-3.mp3")
-        k.loadSound("buble", "../sounds/bubble-one.mp3")
-        k.loadSound("starsArpMusic", "../sounds/starsArpMusic.mp3")
+        k.loadFont("cp437", "fonts/cp437.png", 8, 8, CP437_CHARS);
+        k.loadFont("drake", "fonts/drake_10x10.png", 10, 10, CP437_CHARS);
+
+        k.loadSound("hit", "sounds/heartImpact.wav")
+        k.loadSound("woosh", "sounds/airWoosh.wav")
+        k.loadSound("enteringWaterSplash", "sounds/entering-water.mp3")
+        k.loadSound("tinySplash", "sounds/tiny-splash.mp3")
+
+        k.loadSound("buble", "sounds/bubble-one.mp3")
+        k.loadSound("starsArpMusic", "sounds/starsArpMusic.mp3")
 
     }
 };

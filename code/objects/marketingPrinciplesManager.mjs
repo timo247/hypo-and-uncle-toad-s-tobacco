@@ -19,22 +19,13 @@ export default class MarketingPrinciplesManager {
         return Math.floor(Math.random() * (max - min +1)) + min;
       }
 
-    transformSpecialChars(){
-      //console.log("principes sans modif",this.principles)
-      let p = "mélé";
-      console.log(p.replace("é","a"));
-      console.log(p.replaceAll("é","a"));
-      
+    transformSpecialChars(){      
     this.principles2 = this.principles.map(principle => principle.replaceAll("è","e").replaceAll("é","e").replaceAll("ê", "e").replaceAll("à", "a").replaceAll("â","a").replaceAll('ù','u').replaceAll('ç','c'))
     this.principles2 = this.principles2.map(principle => principle.toUpperCase())
 
     }  
     pickupRandomPrinciple() {
         let n = this.getRandomIntInclusive(0, this.principles.length - 1)
-        console.log('n',n)
-        console.log(this.principles)
-        console.log('principe',this.principles2)
-
         return (this.principles2[n])
     }
 
@@ -44,15 +35,15 @@ export default class MarketingPrinciplesManager {
           text(t, {
             size: s, 
             font: 'sinko',
-            width: width(),
+            width: width() * 0.9,
             transform: (idx, ch) => ({
               pos: vec2(0, wave(-1, 1, time() * 1.5 + idx * 0.5)),
-              scale: wave(1, 1.05, time() * 2 + idx)*k.height()/640,
-              // angle: wave(-9, 9, time() * 3 + idx),
+              scale: wave(1, 1.05, time() * 2 + idx),
             }),
           }),
           origin("center"),
           pos(width()/2, height()/2),
+          "marketing_text",
           z(100)
         ])
       }
