@@ -4,10 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <title>Hypocampus and uncle toad's tobaco</title>
+</head>
+
+    <body>
+        <div class="about-wrapper">
     <h1>Mini Kboom-Js flappy bird with hand-made animations</h1>
+    <div class="hypo-image">
     <h2>About</h2>
-    <p>This is a mini game made with the javascript library Kaboom. The source code can be found on this github repository. You may find the mobile version very difficult, since the game has primarly been designed for desktop purpose. Pay attention to the fact that as soon as you press enter or click "rejouer", the game starts.</p>
+    <p>This is a mini game made with the javascript library <a href="https://kaboomjs.com/">Kaboom</a>. The source code can be found on <a href="https://github.com/timo247/hypo-and-uncle-toad-s-tobacco">this github repository</a>. 
+        You may find the mobile version very difficult, since the game has primarly been designed for desktop purpose. 
+        Pay attention to the fact that as soon as you press enter or click "rejouer", the game starts.</p>
     <h2>Commands</h2>
     <ul>
         <li>
@@ -22,8 +32,28 @@
             <span>Touch: jump (mobile)</span>
         </li>
     </ul>
+</div>
+</div>
     <script type="module" defer src="./code/main.mjs"></script>
+    </body>
     <style>
+        h1,h2 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        p, span {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .about-wrapper {
+            padding: 1rem 1rem;
+        }
+
+        .hypo-image { 
+            background-image: url("sprites/hypo-pink.svg");
+            background-repeat:no-repeat;
+            background-position: center;
+        }
         #myCanvas {
            /* height: 557/1254vw; */
            height: 100vh;
@@ -42,8 +72,6 @@
             outline: none;
         }
     </style>
-</head>
-<body>
     <canvas id="myCanvas"></canvas>
     <div class="new"></div>
 </body>
