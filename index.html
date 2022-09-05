@@ -1,78 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:wght@300&display=swap"
+        rel="stylesheet">
     <title>Hypocampus and uncle toad's tobaco</title>
 </head>
 
-    <body>
-        <div class="about-wrapper">
-    <h1>Mini Kboom-Js flappy bird with hand-made animations</h1>
-    <div class="hypo-image">
-    <h2>About</h2>
-    <p>This is a mini game made with the javascript library <a href="https://kaboomjs.com/">Kaboom</a>. The source code can be found on <a href="https://github.com/timo247/hypo-and-uncle-toad-s-tobacco">this github repository</a>. 
-        You may find the mobile version very difficult, since the game has primarly been designed for desktop purpose. 
-        Pay attention to the fact that as soon as you press enter or click "rejouer", the game starts.</p>
-    <h2>Commands</h2>
-    <ul>
-        <li>
-            <span>Space: jump (desktop)</span>
-            <span>M: mute/unmute sound (desktop)</span>
-            <span>Touch: jump (mobile)</span>
-        </li>
-        <li>
-            <span>M: mute/unmute sound (desktop)</span>
-        </li>
-        <li>
-            <span>Touch: jump (mobile)</span>
-        </li>
-    </ul>
-</div>
-</div>
-    <script type="module" defer src="./code/main.mjs"></script>
-    </body>
-    <style>
-        h1,h2 {
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        p, span {
-            font-family: 'Roboto', sans-serif;
-        }
-
-        .about-wrapper {
-            padding: 1rem 1rem;
-        }
-
-        .hypo-image { 
-            background-image: url("sprites/hypo-pink.svg");
-            background-repeat:no-repeat;
-            background-position: center;
-        }
-        #myCanvas {
-           /* height: 557/1254vw; */
-           height: 100vh;
-            width: 100vw;
-            -webkit-touch-callout: none; /* iOS Safari */
-            -webkit-user-select: none; /* Safari */
-             -khtml-user-select: none; /* Konqueror HTML */
-               -moz-user-select: none; /* Old versions of Firefox */
-                -ms-user-select: none; /* Internet Explorer/Edge */
-                    user-select: none; /* Non-prefixed version, currently
-                                          supported by Chrome, Opera and Firefox */
-        }
-
-        #myCanvas:focus {
-            box-shadow: none;
-            outline: none;
-        }
-    </style>
+<body>
+    <div class="main-wrapper">
+    <div class="about-wrapper">
+        <h1>Mini Kboom-Js flappy bird with hand-made animations</h1>
+        <div class="hypo-image">
+            <h2>About</h2>
+            <p>This is a mini game made with the javascript library <a href="https://kaboomjs.com/">Kaboom</a>. The
+                source code can be found on
+                <a href="https://github.com/timo247/hypo-and-uncle-toad-s-tobacco">this github repository</a>. <br />
+                You may find the mobile version very difficult, since the game has primarly been designed for desktop
+                purpose.
+                Pay attention to the fact that as soon as you press enter or click "rejouer", the game starts.
+            </p>
+            <div class="button-wrapper">
+                <button class="scroll-to-game">Play game</button>
+            </div>
+            <h2>Commands</h2>
+            <ul>
+                <li>
+                    <span>Space (desktop): jump</span>
+                </li>
+                <li>
+                    <span>M (desktop): mute/unmute sound</span>
+                </li>
+                <li>
+                    <span>Touch (mobile): jump </span>
+                </li>
+            </ul>
+        </div>
+    </div>
     <canvas id="myCanvas"></canvas>
-    <div class="new"></div>
+</div>
 </body>
+<script>
+        const play_btn = document.querySelector('.scroll-to-game')
+        play_btn.addEventListener('click', () => {
+            console.log("coucou")
+            const canvas = document.querySelector('#myCanvas')
+            canvas.scrollIntoView()
+        })
+</script>
+<script type="module" defer src="./code/main.mjs"></script>
+<style>
+    h1,
+    h2 {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    p,
+    span {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    a {
+        color: aquamarine;
+    }
+
+    .about-wrapper {
+        padding: 1rem 1rem;
+    } 
+
+    .hypo-image {
+        background-image: url("sprites/hypo-pink.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 40vw 25vh;
+    }
+
+    .button-wrapper {
+        width: 100%;
+        display: flex;
+    }
+
+    .scroll-to-game {
+        margin: auto;
+    }
+
+    #myCanvas {
+        /* height: 557/1254vw; */
+        height: 100vh;
+        width: 100vw;
+        -webkit-touch-callout: none;
+        /* iOS Safari */
+        -webkit-user-select: none;
+        /* Safari */
+        -khtml-user-select: none;
+        /* Konqueror HTML */
+        -moz-user-select: none;
+        /* Old versions of Firefox */
+        -ms-user-select: none;
+        /* Internet Explorer/Edge */
+        user-select: none;
+        /* Non-prefixed version, currently
+                                          supported by Chrome, Opera and Firefox */
+    }
+
+    #myCanvas:focus {
+        box-shadow: none;
+        outline: none;
+    }
+</style>
 </html>
