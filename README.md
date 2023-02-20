@@ -1,4 +1,4 @@
-# hypo-and-uncle-toad-s-tobacco
+# Flappy hypo
 Javascript custom falppy bird rewarding player with marketing tips.
 
 Playable on this address:
